@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hojune.getinline.constant.ErrorCode;
 import com.hojune.getinline.constant.PlaceType;
 import com.hojune.getinline.dto.PlaceRequest;
+import com.sun.jdi.event.ExceptionEvent;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,15 @@ class APIPlaceControllerTest {
         this.mapper = mapper;
     }
 
-    @DisplayName("[API][GET] 장소 리스트 조회")
+    @DisplayName("[API][GET] 장소 리스트 조회 - 장소 데이터를 담은 표준 API 출력")
     @Test
-    void givenNothing_whenRequestingPlaces_thenReturnsListOfPlacesInStandardResponse() throws Exception {
+    void givenNothing_whenRequestingPlace_thenReturnsSuccessfulStandardResponse() throws Exception {
         // Given
 
         // When & Then
         mvc.perform(get("/api/places"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data[0].placeType").value(PlaceType.COMMON.name()))
                 .andExpect(jsonPath("$.data[0].placeName").value("랄라배드민턴장"))
@@ -47,11 +48,15 @@ class APIPlaceControllerTest {
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));
+
+        ;
+
     }
+
 
     @DisplayName("[API][POST] 장소 생성")
     @Test
-    void givenPlace_whenCreatingAPlace_thenReturnsSuccessfulStandardResponse() throws Exception {
+    void givenPlace_whenCreatingAPlace_thenReturnsPlaceInStandardResponse() throws Exception {
         // Given
         PlaceRequest placeRequest = PlaceRequest.of(
                 PlaceType.COMMON,

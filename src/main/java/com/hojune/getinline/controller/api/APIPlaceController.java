@@ -15,8 +15,14 @@ import java.util.List;
 
 public class APIPlaceController {
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/places")
+    public APIDataResponse<Void> createPlace(@RequestBody PlaceRequest placeRequest) {
+        return APIDataResponse.empty();
+    }
+
     @GetMapping("/places")
-    public APIDataResponse<List<PlaceResponse>> getPlaces() {
+    public APIDataResponse<List<PlaceResponse>> getPlace() {
         return APIDataResponse.of(List.of(PlaceResponse.of(
                 PlaceType.COMMON,
                 "랄라배드민턴장",
@@ -25,12 +31,6 @@ public class APIPlaceController {
                 30,
                 "신장개업"
         )));
-    }
-
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/places")
-    public APIDataResponse<Void> createPlace(@RequestBody PlaceRequest placeRequest) {
-        return APIDataResponse.empty();
     }
 
     @GetMapping("/places/{placeId}")
