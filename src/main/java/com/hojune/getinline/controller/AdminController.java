@@ -19,7 +19,7 @@ import java.util.Map;
 @Controller
 public class AdminController {
 
-    @GetMapping("/place")
+    @GetMapping("/places")
     public ModelAndView adminPlaces(
             PlaceType placeType,
             String placeName,
@@ -32,7 +32,7 @@ public class AdminController {
         return new ModelAndView("admin/places", map);
     }
 
-    @GetMapping("/place/{placeId}")
+    @GetMapping("/places/{placeId}")
     public ModelAndView adminPlaceDetail(@PathVariable Long placeId) {
         Map<String, Object> map = new HashMap<>();
         map.put("place", PlaceDTO.of(

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hojune.getinline.constant.ErrorCode;
 import com.hojune.getinline.constant.PlaceType;
 import com.hojune.getinline.dto.PlaceRequest;
-import com.sun.jdi.event.ExceptionEvent;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
