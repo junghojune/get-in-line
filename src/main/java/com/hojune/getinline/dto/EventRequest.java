@@ -14,6 +14,7 @@ public record EventRequest(
         Integer capacity,
         String memo
 ) {
+
     public static EventRequest of(
             Long placeId,
             String eventName,
@@ -33,6 +34,22 @@ public record EventRequest(
                 currentNumberOfPeople,
                 capacity,
                 memo
+        );
+    }
+
+    public EventDTO toDTO() {
+
+        return EventDTO.of(
+                this.placeId(),
+                this.eventName(),
+                this.eventStatus(),
+                this.eventStartDatetime(),
+                this.eventEndDatetime(),
+                this.currentNumberOfPeople(),
+                this.capacity(),
+                this.memo(),
+                null,
+                null
         );
     }
 }
