@@ -9,6 +9,8 @@ public class RepositoryConfig {
 
     @Bean
     public EventRepository eventRepository(){
+
         return new EventRepository() {};
+        
     }
 }

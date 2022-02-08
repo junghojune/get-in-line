@@ -15,13 +15,6 @@ class GetInLineApplicationTests {
 
     }
 
-    //TODO: 불필요 해지면 지울 것
-    @TestConfiguration
-    static class TestConfig {
-        @Bean
-        EventRepository eventRepository() {
-            return new EventRepository() {};
-        }
-    }
+
 
 }
