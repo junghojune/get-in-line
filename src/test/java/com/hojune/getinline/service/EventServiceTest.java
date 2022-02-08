@@ -6,6 +6,7 @@ import com.hojune.getinline.repository.EventRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -41,7 +42,7 @@ class EventServiceTest {
 
         // Then
         assertThat(list).hasSize(2);
-        then(eventRepository).should().findEvents(null, null, null, null, null);
+        BDDMockito.then(eventRepository).should().findEvents(null, null, null, null, null);
     }
 
     @DisplayName("검색 조건과 함께 이벤트 검색하면, 검색된 결과를 출력하여 보여준다.")
@@ -75,7 +76,7 @@ class EventServiceTest {
                     assertThat(event.eventStartDatetime()).isBeforeOrEqualTo(eventStartDatetime);
                 });
 
-        then(eventRepository).should().findEvents(placeId, eventName, eventStatus, eventStartDatetime, eventEndDatetime);
+        BDDMockito.then(eventRepository).should().findEvents(placeId, eventName, eventStatus, eventStartDatetime, eventEndDatetime);
     }
 
     @DisplayName("이벤트 ID로 존쟇는 이벤트를 조회하면, 해당 이벤트 정보를 출력하여 보여준다")
@@ -119,7 +120,7 @@ class EventServiceTest {
 
         // Then
         assertThat(result).isTrue();
-        then(eventRepository).should().insertEvent(dto);
+        verify(eventRepository).insertEvent(dto);
     }
 
     @DisplayName("이벤트 정보를 주지 않으면, 생성 중단하고 결과를 false로 보여준다")
@@ -133,7 +134,7 @@ class EventServiceTest {
 
         // Then
         assertThat(result).isFalse();
-        then(eventRepository).should().insertEvent(null);
+        verify(eventRepository).insertEvent(null);
     }
 
     @DisplayName("이벤트 ID와 정보를 주면, 이벤트 정보를 변경하고 결과를 true로 보여준다")
