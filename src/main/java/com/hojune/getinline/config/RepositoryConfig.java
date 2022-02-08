@@ -11,6 +11,6 @@ public class RepositoryConfig {
     public EventRepository eventRepository(){
 
         return new EventRepository() {};
-        
+
     }
 }
