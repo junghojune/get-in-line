@@ -17,7 +17,7 @@ public interface EventRepository {
             LocalDateTime eventStartDateTime,
             LocalDateTime eventEndDateTime
     ) {
-        return null;
+        return List.of();
     }
 
     default Optional<EventDTO> findEvent(Long placeId) {
